@@ -126,7 +126,23 @@ def createBatchSamplesWithChild(children: Sequence [Sample],
 
     trans.commit()
     stop_timer = time.perf_counter()
-    print(f'Created {number} samples with a children and took {stop_timer-start_timer:0.4f} seconds')
+    print(f'Created {number} samples with sample-children and took {stop_timer-start_timer:0.4f} seconds')
+
+
+def createBatchSamplesWithCode(number: int=10):
+    start_timer = time.perf_counter()
+
+    trans = o.new_transaction()
+    for i in range (0, number):
+        sample = createRandomSample()
+        sample.children = ["/IMS/SARS/HA-773", "/IMS/SARS/EPI-1"]
+        trans.add(sample)
+
+    trans.commit()
+    stop_timer = time.perf_counter()
+    print(f'Created {number} samples with code-children and took {stop_timer-start_timer:0.4f} seconds')
+
+
 
 
 def closeSession():

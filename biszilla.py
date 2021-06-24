@@ -17,11 +17,13 @@ def main():
     # Get samples
     # samples = getSamples()
     # obis_IDs = samples.get_names()
+    number = 10
 
-    createBatchSamples(number=1000)
+    createBatchSamples(number=number)
+    createBatchSamplesWithCode(number=number)
     child1 = getSingleSample(code = "/IMS/SARS/HA-773")
     child2 = getSingleSample(code = "/IMS/SARS/EPI-1")
-    createBatchSamplesWithChild([child1, child2], number=1000)
+    createBatchSamplesWithChild([child1, child2], number=number)
     closeSession()
 
     # print(f'Total number of IDs {len(obis_IDs)}')
