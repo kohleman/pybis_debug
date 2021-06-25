@@ -8,6 +8,7 @@ from classes.Sample import Sample
 from classes.Samples import Samples
 from pybis import Openbis
 from typing import Optional, Sequence
+import datetime
 
 def openSession(credentialsFile):
     global o
@@ -110,7 +111,8 @@ def createBatchSamples(number=10):
 
     trans.commit()
     stop_timer = time.perf_counter()
-    print(f'Created {number} samples and took {stop_timer-start_timer:0.4f} seconds')
+    now = datetime.datetime.now()
+    print(f'[{now}] - Created {number} samples and took {stop_timer-start_timer:0.4f} seconds')
 
 
 def createBatchSamplesWithChild(children: Sequence [Sample],
@@ -120,13 +122,14 @@ def createBatchSamplesWithChild(children: Sequence [Sample],
     trans = o.new_transaction()
     for i in range (0, number):
         sample = createRandomSample()
-        sample.set_children(children)
-        # sample.add_children(child)
+        # sample.set_children(children)
+        sample.add_children(children)
         trans.add(sample)
 
     trans.commit()
     stop_timer = time.perf_counter()
-    print(f'Created {number} samples with sample-children and took {stop_timer-start_timer:0.4f} seconds')
+    now = datetime.datetime.now()
+    print(f'[{now}] - Created {number} samples with sample-children and took {stop_timer-start_timer:0.4f} seconds')
 
 
 def createBatchSamplesWithCode(number: int=10):
@@ -140,7 +143,8 @@ def createBatchSamplesWithCode(number: int=10):
 
     trans.commit()
     stop_timer = time.perf_counter()
-    print(f'Created {number} samples with code-children and took {stop_timer-start_timer:0.4f} seconds')
+    now = datetime.datetime.now()
+    print(f'[{now}] - Created {number} samples with code-children and took {stop_timer-start_timer:0.4f} seconds')
 
 
 
